@@ -1,0 +1,7 @@
+{
+  "landingPage": "/",
+  "login": true,
+  "steps": [
+    { "step": "runPHP", "code": "<?php require '/wordpress/wp-load.php'; require glob(WP_CONTENT_DIR . '/themes/*/tools/seed.php')[0]; hb_seed(glob(WP_CONTENT_DIR . '/themes/*/sample-data/fictional.json')[0]); ?>" }
+  ]
+}

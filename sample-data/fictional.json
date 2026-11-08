@@ -1,0 +1,44 @@
+{
+  "site": {
+    "brand": "Tidewater Tales",
+    "brand_chip": "TV",
+    "labels": { "sample_image": "Sample", "sample_cover": "Sample cover", "sample_chart": "Sample chart", "play_sample": "Play sample", "subscribe": "Subscribe", "needs_account": "Connects to your video account", "ages": "Ages", "nav_books": "Books", "nav_films": "Films", "nav_movies": "Movies", "skip": "Skip to content" },
+    "banner": { "text": "Fictional demo content." },
+    "footer": { "line": "A fictional publisher used to show the theme.", "heading": "Browse" },
+    "home": {
+      "hero_image": "", "tablet_image": "",
+      "hero_title": "Old harbours *retold* for *young* readers.",
+      "cta_films": "Browse our films", "cta_books": "Browse our books",
+      "stats": [ { "value": "12", "label": "Films" }, { "value": "30", "label": "Books" }, { "value": "4", "label": "Ports" } ],
+      "unique_label": "What we do", "why_label": "Why us",
+      "unique_text": "Sample paragraph, set large, with *key phrases* in colour.",
+      "voices_title": "Voices from *happy* readers.",
+      "voices": [ { "name": "Reader one", "place": "Town, country", "text": "Sample review." }, { "name": "Reader two", "place": "Town, country", "text": "Sample review." }, { "name": "Reader three", "place": "Town, country", "text": "Sample review." } ],
+      "journeys_title": "Voyages across *time*.", "subscribe_title": "Subscribe to our channel",
+      "movies_title": "Films that *travel*.", "view_all": "View all", "movies_note": "",
+      "books_title": "Stories that *stay*.", "books_note": ""
+    },
+    "films_page": { "details": "See details", "closed": "No page for this film yet", "subscribe_title": "Subscribe to our channel", "subscribe_sub": "Voyages across time." },
+    "film_page": { "back": "Back to Films", "replay": "Replay sample" },
+    "book_page": {
+      "crumb_home": "Home", "buy_title": "Choose where to buy", "sample_page": "Sample page",
+      "inside_kicker": "Inside the book", "inside_title": "Learn by *doing*.",
+      "activities": [ { "icon": "numbers", "label": "Sums" }, { "icon": "maze", "label": "Mazes" }, { "icon": "colour", "label": "Colouring" }, { "icon": "letters", "label": "Spelling" }, { "icon": "shapes", "label": "Shapes" }, { "icon": "quiz", "label": "Quiz" } ],
+      "quiz_kicker": "The last page", "quiz_title": "Every reader earns a *badge*.", "also_title": "Also *read*."
+    },
+    "chart": { "kicker": "Free chart", "title": "The whole story *on one chart.*", "note": "Sign-up form to be connected.", "sheet_title": "A timeline" },
+    "eras": [
+      { "slug": "first-tide", "name": "First tide", "title": "First *tide*", "items": "Fishers | Salt pans", "short": "First tide" },
+      { "slug": "second-tide", "name": "Second tide", "title": "Second *tide*", "items": "Traders | Lighthouses", "short": "Second tide" },
+      { "slug": "third-tide", "name": "Third tide", "title": "Third *tide*", "items": "Shipyards | Canals", "short": "Third tide" }
+    ]
+  },
+  "films": [
+    { "title": "The Lamp at Gull Point", "slug": "the-lamp-at-gull-point", "era": "second-tide", "body": "A fictional film used to show the template.", "fields": { "subtitle": "A *keeper's* winter", "tagline": "One lamp, one long winter.", "year": "2026", "rating": "All ages", "runtime": "1h 10m", "language": "English", "genres": "Drama|Fictional", "poster_title": "The Lamp", "poster_sub": "At Gull Point", "open": "1" } },
+    { "title": "Salt Road", "slug": "salt-road", "era": "first-tide", "fields": { "tagline": "A fictional second film.", "poster_title": "Salt Road" } }
+  ],
+  "books": [
+    { "title": "The Harbour ABC", "slug": "the-harbour-abc", "body": "A fictional activity book used to show the template.", "fields": { "accent": "ABC", "kicker": "Activity book", "age": "3-7", "series": "Fictional series", "specs": "Language|English\nPages|40", "stores": "View the example store|https://example.com/", "store_note": "Links are examples.", "open": "1", "shelf": "home" } },
+    { "title": "Knots for Beginners", "slug": "knots-for-beginners", "fields": { "age": "7-13", "shelf": "home also" } }
+  ]
+}
