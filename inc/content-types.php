@@ -5,6 +5,7 @@ function hb_film_fields() {
 	return array(
 		'subtitle'      => 'Subtitle (wrap words in *stars* to colour them)',
 		'tagline'       => 'One-line description',
+		'meta_line'     => 'Line above the title; replaces the four fields below when filled',
 		'year'          => 'Year',
 		'rating'        => 'Rating',
 		'runtime'       => 'Runtime',

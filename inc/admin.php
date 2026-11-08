@@ -5,7 +5,7 @@ function hb_flatten( $data, $prefix = '' ) {
 	$out = array();
 	foreach ( $data as $key => $value ) {
 		$path = '' === $prefix ? (string) $key : $prefix . '.' . $key;
-		if ( is_array( $value ) ) {
+		if ( is_array( $value ) && $value ) {
 			$out += hb_flatten( $value, $path );
 		} else {
 			$out[ $path ] = $value;
@@ -52,6 +52,9 @@ function hb_site_screen() {
 	wp_nonce_field( 'hb_site_save', 'hb_site_nonce' );
 	echo '<table class="form-table">';
 	foreach ( hb_flatten( $site ) as $path => $value ) {
+		if ( is_array( $value ) ) {
+			continue;
+		}
 		printf(
 			'<tr><th>%s</th><td><textarea class="large-text" rows="2" name="site[%s]">%s</textarea></td></tr>',
 			esc_html( ucfirst( str_replace( array( '.', '_' ), ' ', $path ) ) ),

@@ -77,16 +77,26 @@
         start();
       });
     });
+    /* Arriving with #player from another page: play, and leave no extra step in the history. */
+    if (location.hash === '#player') {
+      history.replaceState(history.state, '', location.pathname + location.search);
+      player.scrollIntoView({ block: 'center' });
+      start();
+    }
   }
 
   /* Coming back to the list lands on the same card. */
   var isList = document.querySelector('.era-row');
   if (isList) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    document.querySelectorAll('[data-film-link]').forEach(function (a) {
-      a.addEventListener('click', function () {
+    document.querySelectorAll('[data-film-link], .nav-cta').forEach(function (a) {
+      a.addEventListener('click', function (e) {
         store.set('hb-list-y', String(window.scrollY));
         store.set('hb-from-list', '1');
+        if (e.target.closest && e.target.closest('[data-card-play]')) {
+          e.preventDefault();
+          location.href = a.href + '#player';
+        }
       });
     });
     window.addEventListener('pageshow', function (e) {

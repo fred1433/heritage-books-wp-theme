@@ -26,7 +26,7 @@
       "activities": [ { "icon": "numbers", "label": "Sums" }, { "icon": "maze", "label": "Mazes" }, { "icon": "colour", "label": "Colouring" }, { "icon": "letters", "label": "Spelling" }, { "icon": "shapes", "label": "Shapes" }, { "icon": "quiz", "label": "Quiz" } ],
       "quiz_kicker": "The last page", "quiz_title": "Every reader earns a *badge*.", "also_title": "Also *read*."
     },
-    "chart": { "kicker": "Free chart", "title": "The whole story *on one chart.*", "note": "Sign-up form to be connected.", "sheet_title": "A timeline" },
+    "chart": { "kicker": "Preview the chart", "title": "The whole story *on one chart.*", "sheet_title": "A timeline" },
     "eras": [
       { "slug": "first-tide", "name": "First tide", "title": "First *tide*", "items": "Fishers | Salt pans", "short": "First tide" },
       { "slug": "second-tide", "name": "Second tide", "title": "Second *tide*", "items": "Traders | Lighthouses", "short": "Second tide" },

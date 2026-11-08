@@ -16,3 +16,10 @@ Written with Claude Code in one session on 8 November 2026. Edited to remove any
 6. Back from a film to the list had to land on the same card: the list stores its position when a card is clicked and restores it on return. Images have fixed proportions so the page does not shift.
 7. Tested the editor for real: changed a book title in the block editor, saved, and the new title appeared on the book page, its cover and the breadcrumb.
 8. Ran the commands in the README from a fresh clone.
+9. A second pass after an outside review, replayed at the three widths:
+   - the menu's "Play sample" added a step to the history and did not play; it now plays, and one Back returns to the same card;
+   - no "Play sample" and no empty image when a film has no media;
+   - the seed updates by slug instead of creating duplicates;
+   - one article per book, so a book cannot show two ages;
+   - title emphasis now handles punctuation and repeated words;
+   - a real 404 page in place of a blank one.

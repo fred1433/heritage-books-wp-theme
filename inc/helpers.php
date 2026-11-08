@@ -15,16 +15,40 @@ function hb_site( $path, $default = '' ) {
 
 /** Escape text, then turn *words* into emphasised words. */
 function hb_text( $text ) {
-	return preg_replace( '/\*([^*]+)\*/', '<em>$1</em>', esc_html( (string) $text ) );
+	return preg_replace( '/\*(\S(?:[^*]*\S)?)\*/', '<em>$1</em>', esc_html( (string) $text ) );
 }
 
 function hb_meta( $key, $post = null ) {
 	return get_post_meta( $post ? $post->ID : get_the_ID(), $key, true );
 }
 
+/** A file by name: one loaded by the seed, or a Media Library item with that title. */
 function hb_media( $name ) {
+	if ( ! $name ) {
+		return '';
+	}
 	$map = get_option( 'hb_media', array() );
-	return empty( $map[ $name ] ) ? '' : wp_get_attachment_url( $map[ $name ] );
+	if ( ! empty( $map[ $name ] ) ) {
+		return wp_get_attachment_url( $map[ $name ] );
+	}
+	$found = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'title' => $name, 'numberposts' => 1 ) );
+	return $found ? wp_get_attachment_url( $found[0]->ID ) : '';
+}
+
+/** A title with its first match of $accent emphasised, whatever the punctuation. */
+function hb_accent( $title, $accent ) {
+	$at = '' === (string) $accent ? false : stripos( $title, $accent );
+	if ( false === $at ) {
+		return esc_html( $title );
+	}
+	$len = strlen( $accent );
+	return esc_html( substr( $title, 0, $at ) ) . '<em>' . esc_html( substr( $title, $at, $len ) ) . '</em>' . esc_html( substr( $title, $at + $len ) );
+}
+
+/** The film that can really play a sample, if any. */
+function hb_sample_film() {
+	$film = hb_open_film();
+	return $film && hb_media( hb_meta( 'sample_video', $film ) ) ? $film : null;
 }
 
 function hb_img( $name, $alt = '', $class = '', $extra = 'loading="lazy"' ) {
@@ -74,7 +98,7 @@ function hb_books( $shelf ) {
 }
 
 function hb_open_book() {
-	$found = get_posts( array( 'post_type' => 'book', 'numberposts' => 1, 'meta_key' => 'open', 'meta_value' => '1' ) );
+	$found = get_posts( array( 'post_type' => 'book', 'numberposts' => 1, 'meta_key' => 'open', 'meta_value' => '1', 'orderby' => 'menu_order', 'order' => 'ASC' ) );
 	return $found ? $found[0] : null;
 }
 
@@ -124,12 +148,14 @@ function hb_film_card( $film, $show_tagline = true ) {
 	?>
 	<<?php echo $tag . $attr; ?> class="film-card<?php echo $open ? ' is-open' : ''; ?>">
 		<?php echo hb_film_poster( $film ); ?>
-		<span class="film-card-title"><?php echo esc_html( get_the_title( $film ) ); ?></span>
+		<?php if ( ! hb_meta( 'is_sample', $film ) ) : ?>
+			<span class="film-card-title"><?php echo esc_html( get_the_title( $film ) ); ?></span>
+		<?php endif; ?>
 		<?php if ( $show_tagline && hb_meta( 'tagline', $film ) ) : ?>
 			<span class="film-card-line"><?php echo esc_html( hb_meta( 'tagline', $film ) ); ?></span>
 		<?php endif; ?>
-		<?php if ( $open ) : ?>
-			<span class="film-card-play"><?php echo esc_html( hb_site( 'labels.play_sample', 'Play sample' ) ); ?></span>
+		<?php if ( $open && hb_media( hb_meta( 'sample_video', $film ) ) ) : ?>
+			<span class="film-card-play" data-card-play><?php echo esc_html( hb_site( 'labels.play_sample', 'Play sample' ) ); ?></span>
 		<?php endif; ?>
 		<?php if ( $open && hb_meta( 'tagline', $film ) ) : ?>
 			<span class="film-pop" aria-hidden="true">

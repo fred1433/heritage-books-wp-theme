@@ -75,7 +75,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .home-hero h1 em{font-style:normal;color:var(--yellow)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .hero-stats{display:inline-flex;margin-top:30px;background:rgba(45,34,30,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.28);border-radius:38px;padding:14px 8px}
-.hero-stats div{padding:0 clamp(14px,2.2vw,34px);text-align:center;border-left:1px solid rgba(255,255,255,.55)}
+.hero-stats div{display:flex;flex-direction:column-reverse;justify-content:flex-end;padding:0 clamp(14px,2.2vw,34px);text-align:center;border-left:1px solid rgba(255,255,255,.55)}
+.stats-note{color:#fff;font-size:12px;margin:7px 0 0 18px;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .hero-stats div:first-child{border-left:0}
 .hero-stats dd{font:700 clamp(26px,2.6vw,38px)/1.05 var(--hero);color:var(--yellow)}
 .hero-stats dt{font:500 clamp(10px,.9vw,12.5px)/1.25 var(--sans);color:#fff;text-transform:uppercase;letter-spacing:.02em}
@@ -85,8 +86,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .unique-text{font:500 clamp(23px,2.25vw,32px)/1.72 var(--serif);margin-top:28px;padding-left:clamp(0px,3.4vw,50px)}
 .unique-text em{color:var(--red);font-weight:700}
 .unique-stage{position:relative;margin-top:24px;min-height:clamp(250px,26vw,370px)}
-.unique-stage .book-object{position:absolute;left:0;top:0}
-.tablet{position:absolute;right:0;bottom:0;width:66%;aspect-ratio:4/3;background:#222;border-radius:18px;padding:12px;box-shadow:0 26px 40px -22px rgba(0,0,0,.65)}
+.unique-stage .book-object{position:absolute;left:0;top:0;z-index:2}
+.tablet{position:absolute;right:0;bottom:-6%;width:60%;aspect-ratio:4/3;background:#222;border-radius:18px;padding:12px;box-shadow:0 26px 40px -22px rgba(0,0,0,.65)}
 .tablet img{width:100%;height:100%;object-fit:cover;border-radius:7px}
 
 /* Voices */
@@ -98,6 +99,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .voice b{display:block;font:600 18px/1.25 var(--sans)}
 .voice small{color:var(--muted);font-size:13px}
 .voice blockquote{font:italic 400 15.5px/1.65 var(--sans);margin-top:18px}
+.voice-single{grid-template-columns:minmax(0,560px);justify-content:center}
+.voice-single .voice{display:flex;align-items:center;gap:20px}
+.voice-single blockquote{margin:0;font-size:17px}
+.voice-marks{display:flex;flex:none}
+.voice-marks i{width:52px;height:52px;border-radius:50%;background:var(--cream);border:3px solid #fff;box-shadow:0 0 0 1px #e4dcc4;margin-left:-14px}
+.voice-marks i:first-child{margin-left:0}
+.voice-marks i:nth-child(2){background:#fbe39a}
+.voice-marks i:nth-child(3){background:#bfe6f6}
 
 /* Journeys */
 .journeys{background:var(--cream);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1.05fr) minmax(0,.8fr);gap:clamp(24px,3.4vw,54px);align-items:center;padding:clamp(48px,5.6vw,80px) var(--gutter)}
@@ -134,7 +143,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 .film-card-play{display:inline-block;background:var(--yellow);color:#000;font:600 12px/1 var(--sans);border-radius:99px;padding:7px 12px;margin:9px 4px 0}
 .film-pop{display:none}
 @media (hover:hover) and (min-width:900px){
-  .era-row .film-card.is-open .film-pop{position:absolute;display:block;left:calc(100% - 22px);top:-8px;width:min(280px,22vw);z-index:6;background:var(--cream);border-radius:18px;padding:16px 18px;font-size:13.5px;line-height:1.5;opacity:0;visibility:hidden;transition:opacity .16s ease;box-shadow:0 18px 30px -18px rgba(0,0,0,.5)}
+  .era-row .film-card.is-open .film-pop{position:absolute;display:flex;flex-direction:column;justify-content:center;left:0;right:0;top:0;aspect-ratio:16/10;z-index:6;background:var(--cream);border-radius:13px;padding:14px 18px;font-size:13.5px;line-height:1.5;opacity:0;visibility:hidden;transition:opacity .16s ease}
   .era-row .film-card.is-open .film-pop strong{display:block;font-size:16px;margin-bottom:5px}
   .era-row .film-card.is-open:hover .film-pop,.era-row .film-card.is-open:focus-visible .film-pop{opacity:1;visibility:visible}
 }
@@ -157,6 +166,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 .book-face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .book-title{position:absolute;left:7%;right:7%;top:14%;font:700 clamp(13px,1.45vw,22px)/1.06 var(--hero);color:#111;text-align:center}
 .book-xl .book-title{font-size:clamp(24px,3vw,40px)}
+.book-xl .age-badge{left:0;top:-5%}
 .book-lg .book-title{font-size:clamp(14px,1.7vw,24px)}
 .book-xs .book-title{display:none}
 .book-sample{position:absolute;right:4%;bottom:3%;font:500 clamp(8px,.72vw,10px)/1 var(--sans);background:rgba(255,255,255,.9);color:#222;padding:3px 5px;border-radius:3px}
@@ -225,6 +235,8 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 .era-line-object img{width:100%;height:clamp(110px,12vw,180px);object-fit:contain;mix-blend-mode:multiply}
 .era-line small{font-size:12px;line-height:1.45;margin-top:10px}
 .era-row{padding:clamp(34px,3.8vw,54px) var(--gutter) 6px;max-width:1440px;margin:auto;scroll-margin-top:12px}
+.era-row .film-grid{--g:clamp(14px,1.9vw,26px);display:flex;flex-wrap:wrap;justify-content:center;gap:var(--g)}
+.era-row .film-card{width:calc((100% - 3*var(--g))/4)}
 .era-row-items{text-align:center;font-size:clamp(13.5px,1.1vw,15.5px);margin-top:4px}
 .era-row:last-of-type{padding-bottom:clamp(48px,5vw,72px)}
 
@@ -265,7 +277,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 
 /* Book page */
 .crumbs{display:flex;flex-wrap:wrap;gap:4px 10px;padding:14px var(--gutter);font-size:13.5px;background:#fff;color:#555;border-bottom:1px solid #eee}
-.crumbs>*+*::before{content:"/";margin-right:10px;color:#aaa}
+.crumbs>*:not(:last-child)::after{content:"/";margin-left:10px;color:#aaa}
 .crumbs a{display:inline-block;padding:6px 0}
 .crumbs span{padding:6px 0}
 .book-top{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:clamp(30px,5vw,80px);padding:clamp(34px,4.6vw,66px) var(--gutter);max-width:1360px;margin:auto}
@@ -321,6 +333,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .journeys-copy{grid-column:1/-1}
   .era-line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:28px}
   .film-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .era-row .film-card{width:calc((100% - var(--g))/2)}
   .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:38px}
   .poster-title{font-size:clamp(20px,3.6vw,32px)}
   .poster-sub{font-size:clamp(10px,1.6vw,14px)}
@@ -338,10 +351,10 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .nav-pill{padding:4px 5px 4px 9px;gap:0}
   .nav-pill a{font-size:10.5px;letter-spacing:.05em;padding:11px 4px}
   .nav-pill .nav-cta{padding:10px 10px;margin-left:3px}
-  .home-hero{align-items:flex-end;min-height:calc(100svh - 44px)}
+  .home-hero{align-items:flex-end;min-height:0}
   .home-hero-img{object-position:84% 50%}
   .home-hero::before{background:linear-gradient(180deg,rgba(9,22,38,.42) 0,rgba(9,22,38,.12) 24%,rgba(9,22,38,.66) 54%,rgba(9,22,38,.86) 100%)}
-  .home-hero-copy{padding:90px 16px 52px;width:100%}
+  .home-hero-copy{padding:112px 16px 42px;width:100%}
   .home-hero h1{font-size:clamp(41px,11.8vw,56px)}
   .hero-actions{margin-top:20px;gap:9px}
   .hero-actions .btn{flex:1 1 auto;padding:10px 16px}
@@ -351,7 +364,9 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .home-hero>.sample-tag{bottom:8px;right:8px}
   .unique,.chart-band,.inside,.book-top{grid-template-columns:minmax(0,1fr)}
   .unique-text{padding-left:0;font-size:24px;line-height:1.6;margin-top:16px}
-  .unique-stage{min-height:260px}
+  .unique-stage{min-height:270px}
+  .stats-note{margin-left:6px}
+  .voice-single .voice{flex-direction:column;text-align:center}
   .tablet{width:70%}
   .journeys{grid-template-columns:minmax(0,1fr)}
   .era-object{min-height:220px}
@@ -369,7 +384,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .age-badge{width:42px;height:42px;font-size:12.5px}
   .age-badge small{font-size:8px}
   .era-line{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .slide{min-height:calc(100svh - 44px)}
+  .slide{min-height:600px}
   .slide img{object-position:62% 50%}
   .slide-copy{padding:90px 16px 74px}
   .film-hero{min-height:calc(100svh - 44px);flex-direction:column;justify-content:flex-end;align-items:stretch}

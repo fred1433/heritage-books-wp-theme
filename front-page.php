@@ -12,15 +12,16 @@ $book  = hb_open_book();
 			<h1><?php echo hb_text( $h['hero_title'] ?? '' ); ?></h1>
 			<div class="hero-actions">
 				<a class="btn btn-yellow" href="<?php echo esc_url( get_post_type_archive_link( 'film' ) ); ?>"><?php echo esc_html( $h['cta_films'] ?? '' ); ?></a>
-				<?php if ( $book ) : ?><a class="btn btn-white" href="<?php echo esc_url( get_permalink( $book ) ); ?>"><?php echo esc_html( $h['cta_books'] ?? '' ); ?></a><?php endif; ?>
+				<?php if ( $book ) : ?><a class="btn btn-white" href="#books"><?php echo esc_html( $h['cta_books'] ?? '' ); ?></a><?php endif; ?>
 				<?php echo hb_subscribe_locked( 'on-dark' ); ?>
 			</div>
 			<?php if ( ! empty( $h['stats'] ) ) : ?>
 				<dl class="hero-stats">
 					<?php foreach ( $h['stats'] as $stat ) : ?>
-						<div><dd><?php echo esc_html( $stat['value'] ); ?></dd><dt><?php echo esc_html( $stat['label'] ); ?></dt></div>
+						<div><dt><?php echo esc_html( $stat['label'] ); ?></dt><dd><?php echo esc_html( $stat['value'] ); ?></dd></div>
 					<?php endforeach; ?>
 				</dl>
+				<?php if ( ! empty( $h['stats_note'] ) ) : ?><p class="stats-note"><?php echo esc_html( $h['stats_note'] ); ?></p><?php endif; ?>
 			<?php endif; ?>
 		</div>
 		<?php echo hb_sample_tag( hb_site( 'labels.sample_image', 'Sample' ) ); ?>
@@ -42,10 +43,15 @@ $book  = hb_open_book();
 
 	<section class="voices">
 		<h2 class="section-title"><?php echo hb_text( $h['voices_title'] ?? '' ); ?></h2>
-		<div class="voice-grid">
-			<?php foreach ( ( $h['voices'] ?? array() ) as $v ) : ?>
+		<?php $voices = $h['voices'] ?? array(); ?>
+		<div class="voice-grid<?php echo 1 === count( $voices ) ? ' voice-single' : ''; ?>">
+			<?php foreach ( $voices as $v ) : ?>
 				<figure class="voice">
-					<figcaption><span class="voice-mark" aria-hidden="true"><?php echo esc_html( mb_substr( $v['name'], 0, 1 ) ); ?></span><span><b><?php echo esc_html( $v['name'] ); ?></b><small><?php echo esc_html( $v['place'] ); ?></small></span></figcaption>
+					<?php if ( ! empty( $v['name'] ) ) : ?>
+						<figcaption><span class="voice-mark" aria-hidden="true"><?php echo esc_html( mb_substr( $v['name'], 0, 1 ) ); ?></span><span><b><?php echo esc_html( $v['name'] ); ?></b><small><?php echo esc_html( $v['place'] ?? '' ); ?></small></span></figcaption>
+					<?php else : ?>
+						<span class="voice-marks" aria-hidden="true"><i></i><i></i><i></i></span>
+					<?php endif; ?>
 					<blockquote><?php echo esc_html( $v['text'] ); ?></blockquote>
 				</figure>
 			<?php endforeach; ?>
@@ -89,7 +95,7 @@ $book  = hb_open_book();
 		<p class="scope-note"><?php echo esc_html( $h['movies_note'] ?? '' ); ?></p>
 	</section>
 
-	<section class="stories">
+	<section class="stories" id="books">
 		<h2 class="section-title"><?php echo hb_text( $h['books_title'] ?? '' ); ?></h2>
 		<div class="book-grid">
 			<?php foreach ( hb_books( 'home' ) as $b ) { echo hb_book_card( $b ); } ?>

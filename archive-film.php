@@ -8,10 +8,13 @@ $featured = hb_featured_films();
 	<section class="film-carousel" data-carousel aria-roledescription="carousel">
 		<?php foreach ( $featured as $i => $f ) : ?>
 			<article class="slide" data-slide<?php echo 0 === $i ? '' : ' hidden'; ?>>
-				<img src="<?php echo esc_url( get_the_post_thumbnail_url( $f, 'full' ) ); ?>" alt="" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
+				<?php $slide_img = get_the_post_thumbnail_url( $f, 'full' ); ?>
+				<?php if ( $slide_img ) : ?>
+					<img src="<?php echo esc_url( $slide_img ); ?>" alt="" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
+				<?php endif; ?>
 				<div class="slide-copy">
 					<h1><?php echo esc_html( get_the_title( $f ) ); ?><?php if ( hb_meta( 'subtitle', $f ) ) : ?> <span><?php echo hb_text( hb_meta( 'subtitle', $f ) ); ?></span><?php endif; ?></h1>
-					<p><?php echo esc_html( hb_meta( 'tagline', $f ) ); ?></p>
+					<?php if ( hb_meta( 'tagline', $f ) ) : ?><p><?php echo esc_html( hb_meta( 'tagline', $f ) ); ?></p><?php endif; ?>
 					<?php if ( hb_meta( 'open', $f ) ) : ?>
 						<a class="btn btn-yellow btn-play" href="<?php echo esc_url( get_permalink( $f ) ); ?>" data-film-link><?php echo esc_html( $a['details'] ?? '' ); ?><i aria-hidden="true"></i></a>
 					<?php else : ?>

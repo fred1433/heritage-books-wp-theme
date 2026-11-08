@@ -21,13 +21,17 @@
 		<?php if ( hb_site( 'brand_chip' ) ) : ?><i><?php echo esc_html( hb_site( 'brand_chip' ) ); ?></i><?php endif; ?>
 	</a>
 	<nav class="nav-pill" aria-label="Main">
-		<?php $book = hb_open_book(); $film = hb_open_film(); ?>
+		<?php
+		$book    = hb_open_book();
+		$film    = hb_sample_film();
+		$on_film = $film && is_singular( 'film' ) && get_queried_object_id() === $film->ID;
+		?>
 		<?php if ( $book ) : ?>
 			<a href="<?php echo esc_url( get_permalink( $book ) ); ?>"<?php echo is_singular( 'book' ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( hb_site( 'labels.nav_books', 'Books' ) ); ?></a>
 		<?php endif; ?>
 		<a href="<?php echo esc_url( get_post_type_archive_link( 'film' ) ); ?>"<?php echo is_post_type_archive( 'film' ) || is_singular( 'film' ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( hb_site( 'labels.nav_films', 'Films' ) ); ?></a>
 		<?php if ( $film ) : ?>
-			<a class="nav-cta" href="<?php echo esc_url( get_permalink( $film ) . '#player' ); ?>"><?php echo esc_html( hb_site( 'labels.play_sample', 'Play sample' ) ); ?></a>
+			<a class="nav-cta" href="<?php echo esc_url( $on_film ? '#player' : get_permalink( $film ) . '#player' ); ?>"<?php echo $on_film ? ' data-play-sample' : ''; ?>><?php echo esc_html( hb_site( 'labels.play_sample', 'Play sample' ) ); ?></a>
 		<?php endif; ?>
 	</nav>
 </header>

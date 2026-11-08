@@ -1,8 +1,26 @@
 <?php
 /**
  * Loads a content file into a fresh WordPress install: site settings, films, eras, books.
- * Called from the blueprint. hb_seed( $json_path, $media_dir ).
+ * Called from the blueprint. hb_seed( $json_path, $media_dir ). Safe to run twice: it updates by slug.
  */
+function hb_seed_post( $type, $item, $order ) {
+	$slug = $item['slug'] ?? sanitize_title( $item['title'] );
+	$args = array(
+		'post_type'    => $type,
+		'post_status'  => 'publish',
+		'post_title'   => $item['title'],
+		'post_name'    => $slug,
+		'post_content' => $item['body'] ?? '',
+		'menu_order'   => $order,
+	);
+	$existing = get_page_by_path( $slug, OBJECT, $type );
+	if ( $existing ) {
+		$args['ID'] = $existing->ID;
+		return wp_update_post( $args );
+	}
+	return wp_insert_post( $args );
+}
+
 function hb_seed( $json_path, $media_dir = '' ) {
 	wp_set_current_user( 1 );
 	$theme_dir = dirname( __DIR__ );
@@ -28,11 +46,14 @@ function hb_seed( $json_path, $media_dir = '' ) {
 	update_option( 'permalink_structure', '/%postname%/' );
 	update_option( 'show_on_front', 'posts' );
 
-	/* Media */
-	$map = array();
+	/* Media: a file already loaded under this name is kept. */
+	$map = get_option( 'hb_media', array() );
 	if ( $media_dir && is_dir( $media_dir ) ) {
 		foreach ( glob( $media_dir . '/*' ) as $file ) {
 			$name = pathinfo( $file, PATHINFO_FILENAME );
+			if ( ! empty( $map[ $name ] ) && get_post( $map[ $name ] ) ) {
+				continue;
+			}
 			$copy = wp_upload_bits( basename( $file ), null, file_get_contents( $file ) );
 			if ( ! empty( $copy['error'] ) ) {
 				continue;
@@ -53,14 +74,7 @@ function hb_seed( $json_path, $media_dir = '' ) {
 
 	/* Films */
 	foreach ( $data['films'] as $order => $film ) {
-		$id = wp_insert_post( array(
-			'post_type'    => 'film',
-			'post_status'  => 'publish',
-			'post_title'   => $film['title'],
-			'post_name'    => $film['slug'] ?? '',
-			'post_content' => $film['body'] ?? '',
-			'menu_order'   => $order,
-		) );
+		$id = hb_seed_post( 'film', $film, $order );
 		wp_set_object_terms( $id, $film['era'], 'era' );
 		foreach ( $film['fields'] ?? array() as $key => $value ) {
 			update_post_meta( $id, $key, $value );
@@ -72,14 +86,7 @@ function hb_seed( $json_path, $media_dir = '' ) {
 
 	/* Books */
 	foreach ( $data['books'] as $order => $book ) {
-		$id = wp_insert_post( array(
-			'post_type'    => 'book',
-			'post_status'  => 'publish',
-			'post_title'   => $book['title'],
-			'post_name'    => $book['slug'] ?? '',
-			'post_content' => $book['body'] ?? '',
-			'menu_order'   => $order,
-		) );
+		$id = hb_seed_post( 'book', $book, $order );
 		foreach ( $book['fields'] ?? array() as $key => $value ) {
 			update_post_meta( $id, $key, $value );
 		}
@@ -87,13 +94,7 @@ function hb_seed( $json_path, $media_dir = '' ) {
 
 	/* Pages */
 	foreach ( $data['pages'] ?? array() as $page ) {
-		wp_insert_post( array(
-			'post_type'    => 'page',
-			'post_status'  => 'publish',
-			'post_title'   => $page['title'],
-			'post_name'    => $page['slug'],
-			'post_content' => $page['body'],
-		) );
+		hb_seed_post( 'page', $page, 0 );
 	}
 
 	flush_rewrite_rules( false );

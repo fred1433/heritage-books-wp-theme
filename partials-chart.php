@@ -7,7 +7,7 @@ $pts  = array( array( 62, 130 ), array( 215, 130 ), array( 368, 130 ), array( 36
 	<div class="chart-copy">
 		<p class="rule-label"><?php echo esc_html( hb_site( 'chart.kicker' ) ); ?></p>
 		<h2><?php echo hb_text( hb_site( 'chart.title' ) ); ?></h2>
-		<p class="chart-note"><?php echo esc_html( hb_site( 'chart.note' ) ); ?></p>
+		<?php if ( hb_site( 'chart.note' ) ) : ?><p class="chart-note"><?php echo esc_html( hb_site( 'chart.note' ) ); ?></p><?php endif; ?>
 	</div>
 	<figure class="chart-sheet">
 		<svg viewBox="0 0 480 420" role="img" aria-label="<?php echo esc_attr( hb_site( 'chart.sheet_title' ) ); ?>">
