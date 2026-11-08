@@ -10,7 +10,9 @@ Written with Claude Code in one session on 8 November 2026. Edited to remove any
    - the age badge hid the first letters of the book titles;
    - a label on film posters covered the poster title on phones;
    - the winding chart ran off its sheet;
-   - a shadow behind the film title on phones dimmed the text under it.
+   - a shadow behind the film title on phones dimmed the text under it;
+   - a long word on a film poster was clipped, and the gold lettering lost contrast at its darkest;
+   - a video with a fixed height showed as a tall black box on phones.
 6. Back from a film to the list had to land on the same card: the list stores its position when a card is clicked and restores it on return. Images have fixed proportions so the page does not shift.
 7. Tested the editor for real: changed a book title in the block editor, saved, and the new title appeared on the book page, its cover and the breadcrumb.
 8. Ran the commands in the README from a fresh clone.

@@ -126,8 +126,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .poster img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
 a.film-card:hover .poster img{transform:scale(1.035)}
 .poster .sample-tag{right:auto;left:7px;bottom:7px;font-size:10px;padding:3px 6px}
-.poster-lockup{position:absolute;inset:0;padding:9% 8%;display:flex;flex-direction:column;align-items:flex-end;text-align:right;background:linear-gradient(200deg,rgba(0,0,0,.48) 0,rgba(0,0,0,0) 58%)}
-.poster-title{font:700 clamp(18px,2.15vw,31px)/1.02 var(--poster);text-transform:uppercase;background:linear-gradient(180deg,#fff3c4 0,#e8b94b 52%,#a97619 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.7));max-width:82%}
+.poster-lockup{position:absolute;inset:0;padding:8% 7%;display:flex;flex-direction:column;align-items:flex-end;text-align:right;background:linear-gradient(205deg,rgba(0,0,0,.66) 0,rgba(0,0,0,.34) 42%,rgba(0,0,0,0) 72%)}
+.poster-title{font:700 clamp(16px,1.72vw,26px)/1.06 var(--poster);text-transform:uppercase;background:linear-gradient(180deg,#fff9e0 0,#f7d774 55%,#e0ab3f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 2px rgba(0,0,0,.85));max-width:100%}
 .poster-sub{font:700 clamp(9px,.86vw,12.5px)/1.25 var(--poster);text-transform:uppercase;letter-spacing:.06em;color:#f8e3a4;margin-top:6px;text-shadow:0 1px 3px rgba(0,0,0,.85)}
 .film-card-title{display:block;font:600 15.5px/1.35 var(--sans);margin-top:12px;padding:0 4px}
 .film-card-line{display:block;font-size:13px;line-height:1.45;padding:2px 4px 0;color:#222}
@@ -234,7 +234,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 .film-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,0,0,.78) 0,rgba(0,0,0,.45) 34%,rgba(0,0,0,0) 58%),linear-gradient(180deg,rgba(0,0,0,.4) 0,rgba(0,0,0,0) 22%)}
 .film-hero-lockup{position:absolute;right:var(--gutter);top:clamp(84px,8vw,120px);text-align:center;width:min(50%,720px);display:flex;flex-direction:column;align-items:center;isolation:isolate}
 .film-hero-lockup::before{content:"";position:absolute;inset:-12% -8%;z-index:-1;background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0))}
-.film-hero-lockup .poster-title{font-size:clamp(44px,6.8vw,104px);max-width:none;line-height:.98}
+.film-hero-lockup .poster-title{font-size:clamp(44px,6.8vw,104px);max-width:none;line-height:.98;background-image:linear-gradient(180deg,#fff3c4 0,#e8b94b 52%,#b5801f 100%)}
 .film-hero-lockup .poster-sub{font-size:clamp(17px,2.45vw,37px);letter-spacing:.03em;margin-top:12px}
 .film-hero-copy{padding:96px var(--gutter) clamp(30px,3.4vw,48px);max-width:680px}
 .back-link{display:inline-block;color:#fff;font-size:14px;text-underline-offset:3px;margin-bottom:14px}
@@ -311,7 +311,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
 .plain-inner ul{margin-top:10px}
 .plain-inner li{padding:7px 0 7px 22px;position:relative}
 .plain-inner li::before{content:"";position:absolute;left:0;top:17px;width:8px;height:8px;border-radius:50%;background:var(--yellow)}
-.plain-inner video{width:100%;border-radius:14px;border:1px solid #ddd;margin-top:14px;background:#000}
+.plain-inner video{width:100%;height:auto;border-radius:14px;border:1px solid #ddd;margin-top:14px;background:#000}
 .plain-inner figcaption{font-size:13.5px;color:var(--muted);margin-top:8px}
 .plain-inner a{color:#1b45c6;text-underline-offset:3px}
 
@@ -322,9 +322,12 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .era-line{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:28px}
   .film-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:38px}
-  .poster-title{font-size:clamp(20px,4vw,34px)}
+  .poster-title{font-size:clamp(20px,3.6vw,32px)}
   .poster-sub{font-size:clamp(10px,1.6vw,14px)}
   .book-title{font-size:clamp(15px,2.8vw,24px)}
+  .home-hero-copy{max-width:600px}
+  .home-hero::before{background:linear-gradient(90deg,rgba(9,22,38,.8) 0,rgba(9,22,38,.62) 50%,rgba(9,22,38,0) 82%)}
+  .home-hero h1{font-size:clamp(48px,8.4vw,72px)}
   .voice-grid{grid-template-columns:minmax(0,1fr)}
   .voice blockquote{margin-top:12px}
 }
@@ -362,7 +365,7 @@ a.film-card:hover .poster img{transform:scale(1.035)}
   .film-card-line{font-size:12.5px;padding:2px 2px 0}
   .film-card-play{font-size:11.5px;margin:7px 2px 0}
   .book-grid{gap:30px 14px}
-  .book-title{font-size:clamp(13px,4.2vw,19px)}
+  .book-title{font-size:clamp(12px,3.5vw,16px);top:12%}
   .age-badge{width:42px;height:42px;font-size:12.5px}
   .age-badge small{font-size:8px}
   .era-line{grid-template-columns:repeat(2,minmax(0,1fr))}
